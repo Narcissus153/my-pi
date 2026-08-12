@@ -71,10 +71,9 @@ A comprehensive status bar suite with multiple modules:
 | **git.ts** | Git status detection — branch name, ahead/behind counts, staged/modified/deleted/conflicted/untracked file counts |
 | **tps.ts** | Token speed engine — real-time TPS estimation during streaming, accurate TPS after completion, TTFT measurement |
 | **title.ts** | Animated terminal title with a braille spinner during agent activity |
-| **theme.ts** | Cross-platform system dark/light mode detection and automatic pi theme switching |
 | **statusline.ts** | `/statusline` command for interactive configuration of which items appear in the header |
 
-**Files:** `status/index.ts`, `status/header.ts`, `status/git.ts`, `status/tps.ts`, `status/title.ts`, `status/theme.ts`, `status/statusline.ts`
+**Files:** `status/index.ts`, `status/header.ts`, `status/git.ts`, `status/tps.ts`, `status/title.ts`, `status/statusline.ts`
 
 ---
 
