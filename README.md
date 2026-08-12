@@ -9,10 +9,10 @@ A collection of [pi](https://pi.dev) extensions for an enhanced coding experienc
 ### Install with pi (recommended)
 
 ```bash
-pi install https://github.com/Loongphy/my-pi
+pi install git:git@github.com:Narcissus153/my-pi
 ```
 
-(`git:github.com/Loongphy/my-pi` is equivalent.) pi clones the repo into `~/.pi/agent/git/github.com/Loongphy/my-pi` and records the source in your `settings.json` (`packages`). The extensions listed in the package manifest (`package.json` → `pi.extensions`) are loaded on the next startup — no manual copying, and **no filename conflicts**: the package lives in its own directory, fully separate from `~/.pi/agent/extensions/`.
+(`git:github.com/Narcissus153/my-pi` is equivalent.) pi clones the repo into `~/.pi/agent/git/github.com/Narcissus153/my-pi` and records the source in your `settings.json` (`packages`). The extensions listed in the package manifest (`package.json` → `pi.extensions`) are loaded on the next startup — no manual copying, and **no filename conflicts**: the package lives in its own directory, fully separate from `~/.pi/agent/extensions/`.
 
 Then reload pi:
 
@@ -20,12 +20,12 @@ Then reload pi:
 /reload
 ```
 
-Update later with `pi update` (all packages) or `pi update https://github.com/Loongphy/my-pi`.
+Update later with `pi update` (all packages) or `pi update git:git@github.com:Narcissus153/my-pi`.
 
 How it shows up in pi:
 
-- `pi list` → the source string you installed (`https://github.com/Loongphy/my-pi` or `git:github.com/Loongphy/my-pi`) with install path `~/.pi/agent/git/github.com/Loongphy/my-pi`
-- loaded-resources panel (compact labels) → `Loongphy/my-pi:editor.ts`, `Loongphy/my-pi:status`
+- `pi list` → the source string you installed (`git:git@github.com:Narcissus153/my-pi`) with install path `~/.pi/agent/git/github.com/Narcissus153/my-pi`
+- loaded-resources panel (compact labels) → `Narcissus153/my-pi:editor.ts`, `Narcissus153/my-pi:status`
 
 > [!NOTE]
 > The git clone is managed by pi — updating runs `git clean -fdx` + `git pull`, so **don't edit files inside `~/.pi/agent/git/`**. Keep personal customizations in `~/.pi/agent/extensions/` (loaded alongside packages).
@@ -35,7 +35,7 @@ How it shows up in pi:
 Previously this collection was installed by copying files into `~/.pi/agent/extensions/`. To migrate to the recommended install:
 
 ```bash
-pi install https://github.com/Loongphy/my-pi
+pi install git:git@github.com:Narcissus153/my-pi
 ```
 
 Then remove the manual copies from `~/.pi/agent/extensions/` (the ones that exist in the package), and run `/reload`.
@@ -47,10 +47,11 @@ Then remove the manual copies from `~/.pi/agent/extensions/` (the ones that exis
 <summary>Archived: old manual setup (deprecated — for reference only)</summary>
 
 ```bash
-git clone https://github.com/Loongphy/my-pi.git /tmp/pi-extensions
+git clone git@github.com:Narcissus153/my-pi.git /tmp/pi-extensions
 cp -r /tmp/pi-extensions/*.ts ~/.pi/agent/extensions/
 cp -r /tmp/pi-extensions/status/ ~/.pi/agent/extensions/status/
 ```
+
 
 > [!WARNING]
 > Check for filename conflicts. If you already have an extension with the same name in `~/.pi/agent/extensions`, **rename the incoming files** (e.g., `collapse-tools.new.ts`) rather than overwriting your existing ones.

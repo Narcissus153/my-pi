@@ -1,11 +1,11 @@
 {
-	"name": "@loongphy/my-pi",
+	"name": "@narcissus153/my-pi",
 	"version": "0.1.0",
 	"description": "A collection of pi extensions for an enhanced coding experience",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Loongphy/my-pi.git"
+		"url": "https://github.com/Narcissus153/my-pi.git"
 	},
 	"files": [
 		"editor.ts",
