@@ -11,14 +11,19 @@
 		"editor.ts",
 		"request-logger.ts",
 		"shortcuts.ts",
-		"status/"
+		"status/",
+		"diff.ts"
 	],
 	"pi": {
 		"extensions": [
 			"./editor.ts",
 			"./request-logger.ts",
 			"./shortcuts.ts",
-			"./status/"
+			"./status/",
+			"./diff.ts"
 		]
+	},
+	"dependencies": {
+		"@pi-archimedes/diff": "2.0.1"
 	}
 }
