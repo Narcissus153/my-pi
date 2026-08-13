@@ -82,7 +82,6 @@ A comprehensive status bar suite with multiple modules:
 ![editor](https://github.com/user-attachments/assets/37fdd8a3-f924-4829-a4eb-ad9b2f42c187)
 
 - **Composer** — codex-style input area with a bold `❯` prompt (highlighted in `!bash` mode)
-- **Skill mentions** — `$skill` mentions render bold in the theme accent; typing `$` opens the mention picker with all indexed skills (agents, codex, claude, pi); unknown `$tokens` are left untouched
 
 **File:** `editor.ts`
 
