@@ -25,7 +25,7 @@ Update later with `pi update` (all packages) or `pi update git:git@github.com:Na
 How it shows up in pi:
 
 - `pi list` → the source string you installed (`git:git@github.com:Narcissus153/my-pi`) with install path `~/.pi/agent/git/github.com/Narcissus153/my-pi`
-- loaded-resources panel (compact labels) → `Narcissus153/my-pi:editor.ts`, `Narcissus153/my-pi:status`
+- loaded-resources panel (compact labels) → `Narcissus153/my-pi:editor.ts`, `Narcissus153/my-pi:status`, `Narcissus153/my-pi:diff.ts`
 
 > [!NOTE]
 > The git clone is managed by pi — updating runs `git clean -fdx` + `git pull`, so **don't edit files inside `~/.pi/agent/git/`**. Keep personal customizations in `~/.pi/agent/extensions/` (loaded alongside packages).
@@ -100,3 +100,20 @@ Logs every provider request to `~/.pi/agent/requests/<session>.request.log` — 
 `Ctrl+Shift+C` copies the current editor content to the system clipboard.
 
 **File:** `shortcuts.ts`
+
+---
+
+### diff
+
+Overrides Pi's `edit` and `write` renderers while delegating file mutation to
+Pi's native tools. Changed files show Shiki syntax highlighting, word-level
+change emphasis, and an adaptive layout: wide terminals use split `old/new`
+view, while narrow terminals use unified view. The first-phase defaults are
+`github-dark`, a split threshold of `150` columns, and `60` code columns per
+side.
+
+After installing or updating the package, restart Pi or run `/reload`. To
+verify the renderer, edit an existing TypeScript file with multiple changed
+lines; a new file or unchanged write does not produce a comparable file Diff.
+
+**File:** `diff.ts` (runtime dependency: `@pi-archimedes/diff@2.0.1`)
