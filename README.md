@@ -25,7 +25,7 @@ Update later with `pi update` (all packages) or `pi update git:git@github.com:Na
 How it shows up in pi:
 
 - `pi list` → the source string you installed (`git:git@github.com:Narcissus153/my-pi`) with install path `~/.pi/agent/git/github.com/Narcissus153/my-pi`
-- loaded-resources panel (compact labels) → `Narcissus153/my-pi:editor.ts`, `Narcissus153/my-pi:status`, `Narcissus153/my-pi:diff.ts`
+- loaded-resources panel (compact labels) → `Narcissus153/my-pi:editor.ts`, `Narcissus153/my-pi:status`, `Narcissus153/my-pi:diff.ts`, `Narcissus153/my-pi:ask.ts`
 
 > [!NOTE]
 > The git clone is managed by pi — updating runs `git clean -fdx` + `git pull`, so **don't edit files inside `~/.pi/agent/git/`**. Keep personal customizations in `~/.pi/agent/extensions/` (loaded alongside packages).
@@ -117,3 +117,25 @@ verify the renderer, edit an existing TypeScript file with multiple changed
 lines; a new file or unchanged write does not produce a comparable file Diff.
 
 **File:** `diff.ts` (runtime dependency: `@pi-archimedes/diff@2.0.1`)
+
+---
+
+### ask
+
+Registers a model-callable structured question in interactive TUI sessions. Each
+ordinary user prompt can open at most one bounded question. Single-select is the
+default; compatible choices can use explicit multi-select submission. Options
+support a recommended marker, Markdown context, per-option notes, and an
+automatic `Other` response.
+
+Ask is input transport only. Its answer is a tool result, not a subsequent user
+message, so it cannot approve task creation or start, implementation, commits,
+pushes, publication, settings, active-package updates, destructive actions, or
+other external-state changes. Load-bearing workflow decisions still belong in
+the owning Trellis artifact.
+
+Ask is registered only in TUI mode and is absent from RPC, JSON, and print tool
+registries. It adds no Archimedes Ask/Core dependency, notification bus, child
+process, socket, or subagent routing.
+
+**File:** `ask.ts`
