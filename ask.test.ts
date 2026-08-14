@@ -393,15 +393,25 @@ test("component stays bounded and focused at narrow widths and small heights", a
 			runtime.ui.rows = rows;
 			runtime.ui.script = (component) => {
 				let lines = component.render(width);
+				const separator = themeModule.theme.fg("muted", "─".repeat(width));
+				assert.equal(lines[0], separator);
 				assertBounded(lines, width, rows);
 				assert.match(lines.join("\n"), />/);
+				component.handleInput("\r");
+				lines = component.render(width);
+				assert.equal(lines[0], separator);
+				assert.match(lines.join("\n"), /Select an option/i);
+				assertBounded(lines, width, rows);
+				component.handleInput("\x1b[6~");
+				lines = component.render(width);
+				assert.equal(lines[0], separator);
+				assertBounded(lines, width, rows);
 				component.handleInput("\x1b[B");
 				component.handleInput("\r");
 				typeText(component, "\u5176\u4ed6 choice");
 				lines = component.render(width);
+				assert.equal(lines[0], separator);
 				assertBounded(lines, width, rows);
-				component.handleInput("\x1b[6~");
-				assertBounded(component.render(width), width, rows);
 				component.handleInput("\x03");
 			};
 			const result = await runtime.tool.execute(`${width}x${rows}`, params);

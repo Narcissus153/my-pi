@@ -460,7 +460,7 @@ function createAskComponent(
 			}
 		}
 		lastTotalRows = lines.length;
-		const bodyRows = Math.max(1, rows - (message ? 1 : 0));
+		const bodyRows = Math.max(1, rows - 1 - (message ? 1 : 0));
 		lastViewportRows = Math.min(bodyRows, lines.length);
 		let start = manualViewportStart;
 		if (start === undefined) {
@@ -472,9 +472,11 @@ function createAskComponent(
 		if (start > 0) viewport[0] = theme.fg("dim", truncateToWidth("... above ...", renderWidth, ""));
 		if (end < lines.length) viewport[viewport.length - 1] = theme.fg("dim", truncateToWidth("... below ...", renderWidth, ""));
 		lastViewportStart = start;
-		const rendered = message
-			? [theme.fg("warning", truncateToWidth(`! ${message}`, renderWidth, "")), ...viewport]
-			: viewport;
+		const rendered = [
+			theme.fg("muted", "─".repeat(renderWidth)),
+			...(message ? [theme.fg("warning", truncateToWidth(`! ${message}`, renderWidth, ""))] : []),
+			...viewport,
+		];
 		cachedWidth = width;
 		cachedRows = rows;
 		cachedLines = rendered;
