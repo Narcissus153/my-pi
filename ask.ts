@@ -371,13 +371,6 @@ function createAskComponent(
 			}
 			return;
 		}
-
-		const printable = normalizeEditable(stripTerminalSequences(data));
-		if (cursor < question.options.length && printable.trim()) {
-			beginEdit("note", notes.get(cursor) ?? "", cursor);
-			editor.insertTextAtCursor(printable);
-			invalidate();
-		}
 	}
 
 	function handleInput(data: string) {

@@ -257,7 +257,7 @@ test("normalization failures do not consume the prompt allowance", async () => {
 	assert.equal(runtime.ui.modalCount, 2);
 });
 
-test("single select keeps recommendation explicit and supports notes and Other", async () => {
+test("single select keeps recommendation explicit and supports Tab notes and Other", async () => {
 	const runtime = await createRuntime("tui");
 	await runtime.runner.emitBeforeAgentStart("recommended", undefined, "", { cwd: root });
 	runtime.ui.script = (component) => {
@@ -274,8 +274,22 @@ test("single select keeps recommendation explicit and supports notes and Other",
 	assert.equal(cancelled.details.status, "cancelled");
 	assert.deepEqual(cancelled.details.selectedOptions, []);
 
+	await runtime.runner.emitBeforeAgentStart("printable ignored", undefined, "", { cwd: root });
+	runtime.ui.script = (component) => {
+		const before = component.render(80);
+		component.handleInput("because");
+		assert.deepEqual(component.render(80), before);
+		component.handleInput("\r");
+	};
+	const printableIgnored = await runtime.tool.execute("printable-ignored", simpleQuestion);
+	assert.deepEqual(printableIgnored.details.selectedOptions, [{ index: 0, label: "Alpha" }]);
+
 	await runtime.runner.emitBeforeAgentStart("note", undefined, "", { cwd: root });
 	runtime.ui.script = (component) => {
+		component.handleInput("because");
+		assert.doesNotMatch(component.render(80).join("\n"), /Note for Alpha/);
+		component.handleInput("\t");
+		assert.match(component.render(80).join("\n"), /Note for Alpha/);
 		component.handleInput("because \x1b[31mred");
 		component.handleInput("\r");
 	};
@@ -305,6 +319,7 @@ test("multi select requires explicit submit and preserves notes plus Other", asy
 	runtime.ui.script = (component) => {
 		component.handleInput(" ");
 		component.handleInput("\x1b[B");
+		component.handleInput("\t");
 		typeText(component, "works together");
 		component.handleInput("\r");
 		component.handleInput("\x1b[B");
